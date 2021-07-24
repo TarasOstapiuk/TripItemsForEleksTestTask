@@ -9,16 +9,21 @@ namespace TripItemsForEleks.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDBContext contextDB;
-        public HomeController(AppDBContext contextDB)
+        private readonly IHomeRepository _homeRepository;
+
+        public HomeController(IHomeRepository homeRepository)
         {
-            contextDB = contextDB;
+            _homeRepository = homeRepository;
         }
+              
         public IActionResult Index()
         {
-            
-
             return View();
+        }
+        public IActionResult Favorites()
+        {
+            IEnumerable<Item> items = _homeRepository.GetFavorites();
+            return View(items);
         }
     }
 }

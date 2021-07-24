@@ -4,9 +4,32 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/css/forLayout.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Hello Taras</h1>
+    <div class="headerPhrase">
+        This aplication can help you not to forget items for your vojage
+    </div>
+    <div class="containerHeader">
+        <div class="elemHeader">
+            <a class="buttonHeader el1" href="/trip/index">Trips</a>
+        </div>
+        <div class="elemHeader">
+            <a class="buttonHeader el2" href="/item/index">Items</a>
+        </div>
+        <div class="elemHeader">
+            <a class="buttonHeader el3" href="/trip/createtrip">Create Trip</a>
+        </div>
+        <div class="elemHeader">
+            <a class="buttonHeader el4" href="/item/createitem">Create items</a>
+        </div>
+        <div class="elemHeader">
+            <a class="buttonHeader el5" href="/home/favorites">Favorite items</a>
+        </div>
+    </div>
+    
+    
+    
     <div>
         @RenderBody()
     </div>

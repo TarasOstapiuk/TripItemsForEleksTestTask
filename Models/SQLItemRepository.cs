@@ -20,10 +20,10 @@ namespace TripItemsForEleks.Models
             contextDB.SaveChanges();
             return item;
         }
-
+        
         public Item Delete(int id)
         {
-            Item itemToDelete = contextDB.Items.Find(id);
+            Item itemToDelete = contextDB.Items.FirstOrDefault(i => i.Id == id);
             if (itemToDelete != null)
             {
                 contextDB.Items.Remove(itemToDelete);

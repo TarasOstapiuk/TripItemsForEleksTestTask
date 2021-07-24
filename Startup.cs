@@ -25,27 +25,29 @@ namespace TripItemsForEleks
         {
             services.AddDbContextPool<AppDBContext>(options =>
                         options.UseSqlServer(_config.GetConnectionString("TripItemsDBConnections")));
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-         }
+            //services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddScoped<ITripRepository, SQLTripRepository>();
+            services.AddScoped<IItemRepository, SQLItemRepository>();
+            services.AddScoped<IHomeRepository, SQLHomeRepository>();
+            services.AddMvc();
+            services.AddControllers();
 
-       
+        }
+
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseRouting();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
+            //app.UseMvcWithDefaultRoute();
+            app.UseEndpoints(endpoints =>
+               endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}")
+           );
         }
     }
 }
-    
+

@@ -8,7 +8,7 @@ namespace TripItemsForEleks.Models
 {
     public class Item
     {
-        [Required]
+        
         public int Id { get; set; }
 
         public string ItemName { get; set; }

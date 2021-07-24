@@ -1,0 +1,18 @@
+﻿@model   IEnumerable<Trip>;
+
+<div>
+    <h3>
+        Your Items:
+    </h3>
+    @foreach (var i in Model)
+    {
+        <div>
+            <h4>
+                @i.TripName
+            </h4>
+        </div>
+    }
+
+</div>
+
+<h3>Hello Eleks from Trip</h3>
