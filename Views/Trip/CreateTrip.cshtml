@@ -1,1 +1,25 @@
-﻿<h3>Hello from tripcontroller and trip viev!</h3>
+﻿@model IEnumerable<Item>
+
+<h3>Hello from tripcontroller and trip viev!</h3>
+<form method="post" action="/trip/createtrip">
+    <p>
+        <label for="TripName">Enter Name of your Trip</label>
+        <textarea name="TripName" placeholder="Max 100 sign"
+                  cols="30" rows="4" maxlength="100" minlength="2" required>
+        </textarea>
+    </p>
+    <p>
+    <p>
+        <h3>Choose your Items for that Trip</h3>
+    </p>
+    @foreach (var item in Model)
+    {
+        <p>
+            <input type="checkbox" name="ItemsToTrip" />@item.ItemName
+        </p>
+    }
+    </p>
+    <p>
+        <input type="submit" value="Add" />
+    </p>
+</form>

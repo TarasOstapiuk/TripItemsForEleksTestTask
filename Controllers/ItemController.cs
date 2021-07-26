@@ -44,12 +44,18 @@ namespace TripItemsForEleks.Controllers
             }
             else return View();
         }
+        /*[HttpGet]
+        public ViewResult Delete(int id)
+        {
+            Item item = _itemRepository.GetItem(id);
+            return View("Delete", item);
+        }*/
 
         [HttpPost]
-        public RedirectToActionResult Delete(Item item)
+        public string Delete(int Id)
         {
-             _itemRepository.Delete(item.Id);
-            return RedirectToAction("Index");
+            Item itemTharIsDeleted = _itemRepository.Delete(Id);
+            return $"Item {itemTharIsDeleted.ItemName} was successfully deleted";
         }
         
        

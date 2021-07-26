@@ -39,7 +39,7 @@ namespace TripItemsForEleks.Models
 
         public Item GetItem(int id)
         {
-            return contextDB.Items.Find(id);
+            return contextDB.Items.FirstOrDefault(i => i.Id==id);
         }
 
          public Item Update(Item itemChanges)

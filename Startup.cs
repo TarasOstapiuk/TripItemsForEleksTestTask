@@ -26,9 +26,9 @@ namespace TripItemsForEleks
             services.AddDbContextPool<AppDBContext>(options =>
                         options.UseSqlServer(_config.GetConnectionString("TripItemsDBConnections")));
             //services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddScoped<ITripRepository, SQLTripRepository>();
-            services.AddScoped<IItemRepository, SQLItemRepository>();
-            services.AddScoped<IHomeRepository, SQLHomeRepository>();
+            services.AddTransient<ITripRepository, SQLTripRepository>();
+            services.AddTransient<IItemRepository, SQLItemRepository>();
+            services.AddTransient<IHomeRepository, SQLHomeRepository>();
             services.AddMvc();
             services.AddControllers();
 

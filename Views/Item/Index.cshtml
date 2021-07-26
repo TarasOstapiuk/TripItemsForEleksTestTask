@@ -9,16 +9,21 @@
         <div>
             <h4>
                 @i.ItemName
-                <button type="submit" formmethod="post">
-                    <a asp-action="Delete" asp-controller="Home" 
-                       asp-route-id="@i.Id">Удалить</a>
-                    <a href="/item/delete/@i">Delete</a>
-                </button>
-                
-            
-            
+                <div>
+                    <button onclick="deleteItem(@i.Id)"> Delete</button>
+                </div>
             </h4>
         </div>
     }
 
 </div>
+<script>
+    function deleteItem(x) {
+        //alert(x);
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/item/delete/'+x, false);
+        xhttp.send();
+        window.location.reload();
+        }
+
+</script>
