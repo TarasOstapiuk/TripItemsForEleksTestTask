@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<Item>
 
 <h3>Hello from tripcontroller and trip viev!</h3>
-<form method="post" action="/trip/createtrip">
+
     <p>
-        <label for="TripName">Enter Name of your Trip</label>
-        <textarea name="TripName" placeholder="Max 100 sign"
+       <input type="text" name="TripName" placeholder="Max 100 sign" id="textareaForTrip"
                   cols="30" rows="4" maxlength="100" minlength="2" required>
-        </textarea>
+        
     </p>
     <p>
     <p>
@@ -14,12 +13,55 @@
     </p>
     @foreach (var item in Model)
     {
-        <p>
-            <input type="checkbox" name="ItemsToTrip" />@item.ItemName
-        </p>
+        <div>
+            <input type="checkbox" name="ItemsToTrip" value="@item.Id"/>@item.ItemName
+        </div>
     }
     </p>
     <p>
-        <input type="submit" value="Add" />
+        <button onclick="createTripWithItems()">Create Trip</button>
     </p>
 </form>
+
+<script>
+    let markedItemsNames = [];
+    let tripName;
+    function createTripWithItems() {
+        getItems();
+        getTripName();
+        jsonBuilder();
+        finalfunction();
+    }
+    function getItems() {
+        var signedCheckBox = document.getElementsByName('ItemsToTrip');
+        for (var checkbox of signedCheckBox) {
+            if (checkbox.checked)
+                markedItemsNames.push(Number.parseInt(checkbox.value));
+            //return JSON.stringify(markedItems)
+             }
+       // alert(markedItemsNames);
+       }
+    function getTripName() {
+       
+        tripName = document.getElementById("textareaForTrip").value;
+      //  alert(tripName);
+    }
+    function jsonBuilder() {
+        let newCreatedTrip = {
+            tripName: tripName, 
+            itemsListToTrip: markedItemsNames
+        };
+        return JSON.stringify(newCreatedTrip);
+    }
+    function finalfunction() {
+        alert(jsonBuilder())
+        var xhttp = new XMLHttpRequest();
+        var variable = jsonBuilder();
+        alert(variable);
+        xhttp.open('POST', '/trip/createtrip/');
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.send(variable); // may not vvork
+        //window.location.reload();
+    }
+
+</script>

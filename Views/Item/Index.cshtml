@@ -21,7 +21,7 @@
     function deleteItem(x) {
         //alert(x);
         var xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/item/delete/'+x, false);
+        xhttp.open('POST', '/item/delete/', false);
         xhttp.send();
         window.location.reload();
         }

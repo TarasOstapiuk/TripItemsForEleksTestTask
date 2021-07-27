@@ -31,7 +31,7 @@ namespace TripItemsForEleks
             services.AddTransient<IHomeRepository, SQLHomeRepository>();
             services.AddMvc();
             services.AddControllers();
-
+          
         }
 
 
