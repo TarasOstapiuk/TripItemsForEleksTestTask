@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +23,17 @@ namespace TripItemsForEleks.Models
             return trip;
         }
 
+        public void CreateTrip(string name, int[] itemsId)
+        {
+            /*contextDB.ItemsToTrips.FromSqlRaw(" ").ToList();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID");
+            
+            dt.Rows.Add(1, 'John');
+            dt.Rows.Add(2, 'Mark');
+            dt.Rows.Add(3, 'Stacy');*/
+        }
+
         public Trip Delete(int id)
         {
             Trip tripToDelete = contextDB.Trips.Find(id);
@@ -34,7 +47,10 @@ namespace TripItemsForEleks.Models
 
         public IEnumerable<Trip> GetAllTrips()
         {
-            return contextDB.Trips;
+            return contextDB.Trips.;
+
+            
+
         }
 
         public Trip GetTrip(int id)
@@ -49,5 +65,6 @@ namespace TripItemsForEleks.Models
             contextDB.SaveChanges();
             return tripChanges;
         }
+        
     }
 }

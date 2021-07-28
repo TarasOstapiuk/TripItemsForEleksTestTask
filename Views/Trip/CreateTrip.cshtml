@@ -24,12 +24,11 @@
 </form>
 
 <script>
-    let markedItemsNames = [];
+    let markedItemsNames = []; 
     let tripName;
     function createTripWithItems() {
         getItems();
         getTripName();
-        jsonBuilder();
         finalfunction();
     }
     function getItems() {
@@ -37,14 +36,19 @@
         for (var checkbox of signedCheckBox) {
             if (checkbox.checked)
                 markedItemsNames.push(Number.parseInt(checkbox.value));
-            //return JSON.stringify(markedItems)
-             }
-       // alert(markedItemsNames);
+            }
        }
     function getTripName() {
        
         tripName = document.getElementById("textareaForTrip").value;
-      //  alert(tripName);
+       }
+    function toStringList() { 
+        var str ='';
+        for (var i = 0; i < markedItemsNames.length; i++) {
+            str += '&tripId[' + i + ']=' + markedItemsNames[i];
+        }
+        alert(str);
+        return str;
     }
     function jsonBuilder() {
         let newCreatedTrip = {
@@ -56,11 +60,11 @@
     function finalfunction() {
         alert(jsonBuilder())
         var xhttp = new XMLHttpRequest();
-        var variable = jsonBuilder();
-        alert(variable);
-        xhttp.open('POST', '/trip/createtrip/');
-        xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.send(variable); // may not vvork
+        //var variable = jsonBuilder();
+       // alert(variable);   /Artist/GetImages/?artistName=cher&apiKey=XXX   string name, int[] tripid
+        xhttp.open('POST', '/trip/createtrip/?name=' + tripName + toStringList());
+        //xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.send(); // may not vvork
         //window.location.reload();
     }
 

@@ -15,7 +15,7 @@ namespace TripItemsForEleks.Controllers
         private readonly ITripRepository _tripRepository;
         private readonly IItemRepository _itemRepository;
 
-        public TripController(ITripRepository tripRepository, 
+        public TripController(ITripRepository tripRepository,
                               IItemRepository itemRepository)
         {
             _tripRepository = tripRepository;
@@ -34,13 +34,10 @@ namespace TripItemsForEleks.Controllers
             return View(allItem);
         }
         [HttpPost]
-        public RedirectToActionResult CreateTrip(TripItemsDTO trip)
+        public RedirectToActionResult CreateTrip(string name, int[] tripid)
         {
-            var a = HttpContext.Request;
-            //a.Body.InputStream.Seek(0, SeekOrigin.Begin);
-           // string jsonString = new StreamReader(a.InputStream).ReadToEnd();
-            
-            /*Trip newTrip = _tripRepository.AddTrip(trip);*/ 
+            _tripRepository.CreateTrip(name, tripid);
+
             return RedirectToAction("Index");
         }
     }
