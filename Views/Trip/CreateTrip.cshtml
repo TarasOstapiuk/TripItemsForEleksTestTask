@@ -4,7 +4,7 @@
 
     <p>
        <input type="text" name="TripName" placeholder="Max 100 sign" id="textareaForTrip"
-                  cols="30" rows="4" maxlength="100" minlength="2" required>
+                  cols="30"  maxlength="100" minlength="2" required>
         
     </p>
     <p>
@@ -47,25 +47,25 @@
         for (var i = 0; i < markedItemsNames.length; i++) {
             str += '&tripId[' + i + ']=' + markedItemsNames[i];
         }
-        alert(str);
         return str;
     }
-    function jsonBuilder() {
-        let newCreatedTrip = {
-            tripName: tripName, 
-            itemsListToTrip: markedItemsNames
-        };
-        return JSON.stringify(newCreatedTrip);
-    }
+    //function jsonBuilder() {
+    //    let newCreatedTrip = {
+    //        tripName: tripName, 
+    //        itemsListToTrip: markedItemsNames
+    //    };
+    //    return JSON.stringify(newCreatedTrip);
+    //}
     function finalfunction() {
-        alert(jsonBuilder())
+       
         var xhttp = new XMLHttpRequest();
         //var variable = jsonBuilder();
        // alert(variable);   /Artist/GetImages/?artistName=cher&apiKey=XXX   string name, int[] tripid
         xhttp.open('POST', '/trip/createtrip/?name=' + tripName + toStringList());
         //xhttp.setRequestHeader('Content-type', 'application/json');
         xhttp.send(); // may not vvork
-        //window.location.reload();
+        alert("Your trip");
+        window.location.href = "/trip/index";
     }
 
 </script>

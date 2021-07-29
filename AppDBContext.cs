@@ -35,5 +35,12 @@ namespace TripItemsForEleks.Models
         public DbSet<Trip> Trips { get; set; }
         public DbSet<ItemsToTrip> ItemsToTrips { get; set; }
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseLazyLoadingProxies();
+        //}
+
     }
+
+
 }

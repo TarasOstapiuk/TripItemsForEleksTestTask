@@ -10,10 +10,10 @@ namespace TripItemsForEleks.Models
         public int Id { get; set; }
 
         public int TripId { get; set; }
-        public Trip Trip { get; set; }
+        public virtual Trip Trip { get; set; }
 
         public int  ItemId { get; set; }
-        public Item Item { get; set; }
+        public virtual Item Item { get; set; }
 
     }
 }

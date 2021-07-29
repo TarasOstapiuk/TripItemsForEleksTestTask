@@ -12,6 +12,6 @@ namespace TripItemsForEleks.Models
 
         public string ItemName { get; set; }
 
-        public List<ItemsToTrip> ItemsToTrip { get; set; }
+        public virtual List<ItemsToTrip> ItemsToTrip { get; set; }
     }
 }

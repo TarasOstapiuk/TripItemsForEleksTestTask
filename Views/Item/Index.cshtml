@@ -19,9 +19,9 @@
 </div>
 <script>
     function deleteItem(x) {
-        //alert(x);
+        alert(x);
         var xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/item/delete/', false);
+        xhttp.open('POST', '/item/delete/'+x, false);
         xhttp.send();
         window.location.reload();
         }

@@ -21,7 +21,7 @@ namespace TripItemsForEleks.Controllers
             _tripRepository = tripRepository;
             _itemRepository = itemRepository;
         }
-        public IActionResult Index()
+        public ViewResult Index()
         {
             IEnumerable<Trip> trips = _tripRepository.GetAllTrips();
             return View(trips);
@@ -38,7 +38,7 @@ namespace TripItemsForEleks.Controllers
         {
             _tripRepository.CreateTrip(name, tripid);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Trip");
         }
     }
 }
