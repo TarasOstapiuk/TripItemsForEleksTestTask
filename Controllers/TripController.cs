@@ -38,7 +38,32 @@ namespace TripItemsForEleks.Controllers
         {
             _tripRepository.CreateTrip(name, tripid);
 
-            return RedirectToAction("Index","Trip");
+            return RedirectToAction("Index", "Trip");
+        }
+        [HttpGet]
+        public ActionResult EditDelete(int id)
+        {
+            Trip trip = _tripRepository.GetTrip(id);
+            List<Item> listOfAllItems = (List<Item>)_itemRepository.GetAllItems();
+            ViewBag.ListOtItems = listOfAllItems;
+            return View("~/Views/Trip/EditDelete.cshtml", trip);
+        }
+
+        [HttpPost]
+        public RedirectToActionResult DeleteTrip(int id)
+        {
+            Trip tripToBeDelited = _tripRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public void DeleteItemFromTrip(int Id)
+        {
+            _tripRepository.DeleteItemFromTrip(Id);
+        }
+        [HttpPost]
+        public void AddingItemToExistingTrip(int idItem, int IdTrip)
+        {
+            _tripRepository.AddingItemToExistingTrip(IdTrip, idItem);
         }
     }
 }

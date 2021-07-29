@@ -13,5 +13,7 @@ namespace TripItemsForEleks.Models
         Trip Update(Trip tripChanges);
         Trip Delete(int id);
         void CreateTrip(string name, int[] itemsId);
+        void DeleteItemFromTrip(int id);
+        void AddingItemToExistingTrip(int IdItem, int IdTrip);
     }
 }

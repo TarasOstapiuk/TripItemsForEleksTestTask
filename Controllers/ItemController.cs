@@ -54,8 +54,8 @@ namespace TripItemsForEleks.Controllers
         [HttpPost]
         public string Delete(int Id)
         {
-            Item itemTharIsDeleted = _itemRepository.Delete(Id);
-            return $"Item {itemTharIsDeleted.ItemName} was successfully deleted";
+            Item itemThatIsDeleted = _itemRepository.Delete(Id);
+            return $"Item {itemThatIsDeleted.ItemName} was successfully deleted";
         }
         
        

@@ -10,17 +10,19 @@
             <h2>
                 @t.TripName
             </h2>
-            <h4>
+           
                 @foreach (var i in t.ItemsToTrip)
                 {
                     <div>
                         @i.Item.ItemName
                     </div>
                 }
-                <div>
-                    <button onclick="editDeleteTrip(@t)"> Edit or Delete</button>
-                </div>
-            </h4>
+            <div>
+                <form method="get" action="/trip/editdelete/@t.Id">
+                    <input type="submit" value ="Edit or Delete"/>
+                </form>
+            </div>
+            
         </div>
     }
 
@@ -28,8 +30,15 @@
 
 <h3>Hello Eleks from Trip</h3>
 <script>
-    function editDeleteTrip() {
-
+    function editDeleteTrip(x) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('GET', '/trip/edit/' + x, false);
+        xhttp.send();
+        var status = xhttp.status;
+        if (status == 200)
+        {
+            window.location.href = "/trip/edit";
+        }
+        //window.location.reload();
     }
-
 </script>

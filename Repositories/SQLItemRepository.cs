@@ -34,7 +34,7 @@ namespace TripItemsForEleks.Models
 
         public IEnumerable<Item> GetAllItems()
         {
-            return contextDB.Items;
+            return contextDB.Items.ToList();
         }
 
         public Item GetItem(int id)

@@ -62,6 +62,8 @@ namespace TripItemsForEleks.Models
             return tripToDelete;
         }
 
+       
+
         public IEnumerable<Trip> GetAllTrips()
             {
             var trips = contextDB.Trips.ToList();
@@ -71,7 +73,8 @@ namespace TripItemsForEleks.Models
 
         public Trip GetTrip(int id)
         {
-            return contextDB.Trips.Find(id);
+            Trip currentTrip = contextDB.Trips.FirstOrDefault(i => i.Id == id);
+            return currentTrip;
         }
 
         public Trip Update(Trip tripChanges)
@@ -81,6 +84,18 @@ namespace TripItemsForEleks.Models
             contextDB.SaveChanges();
             return tripChanges;
         }
-        
+        public void DeleteItemFromTrip(int id)
+        {
+            Microsoft.Data.SqlClient.SqlParameter param = new Microsoft.Data.SqlClient.SqlParameter("@IDRow", id);
+            contextDB.Database.ExecuteSqlRaw("Exec DeleteItemFromTrip @IDRow", param);
+        }
+
+        public void AddingItemToExistingTrip(int IdTrip, int IdItem)
+        {
+            Microsoft.Data.SqlClient.SqlParameter param = new Microsoft.Data.SqlClient.SqlParameter("@IDTrip", IdTrip);
+            Microsoft.Data.SqlClient.SqlParameter param1 = new Microsoft.Data.SqlClient.SqlParameter("@IDItem", IdItem);
+
+            contextDB.Database.ExecuteSqlInterpolated($"AddingItemToExistingTrip {IdTrip}, {IdItem}");
+        }
     }
 }
