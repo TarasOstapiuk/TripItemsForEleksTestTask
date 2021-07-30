@@ -2,11 +2,11 @@
 
 <h3>Hello from tripcontroller and trip viev!</h3>
 
-    <p>
-       <input type="text" name="TripName" placeholder="Max 100 sign" id="textareaForTrip"
-                  cols="30"  maxlength="100" minlength="2" required>
-        
-    </p>
+<p>
+    <label for="textareaForTrip">Name the trip:</label>
+    <input type="text" name="TripName" placeholder="Max 100 sign" id="textareaForTrip"
+           cols="30" maxlength="100" minlength="2" required>
+</p>
     
     <p>
         <h3>Choose your Items for that Trip</h3>
@@ -21,15 +21,32 @@
     <p>
         <button onclick="createTripWithItems()">Create Trip</button>
     </p>
-</form>
+    <div>
+        
+        <label for="tripFromExistingOne">Name the trip:</label>
+        <input type="text" id="tripNameFromOld" name="TripName1" placeholder="Max 100 sign"
+               cols="30" maxlength="100" minlength="2" required />
+        <label for="items">Choose Items from another Trip:</label><br />
+        <select id='OldTrip' name="oldTrips">
+            @foreach (Trip i in ViewBag.ReadyMadeTrips)
+            {
+                <option value="@i.Id">@i.TripName</option>
+            }
+
+        </select>
+        <button onclick="createTripFromExistingOne()"> Create Trip</button>
+
+    </div>
 
 <script>
     let markedItemsNames = []; 
     let tripName;
+    let tripNameFromOld;
+    let oldTripID;
     function createTripWithItems() {
         getItems();
         getTripName();
-        finalfunction();
+        AJAXCallToCreate();
     }
     function getItems() {
         var signedCheckBox = document.getElementsByName('ItemsToTrip');
@@ -39,8 +56,7 @@
             }
        }
     function getTripName() {
-       
-        tripName = document.getElementById("textareaForTrip").value;
+       tripName = document.getElementById("textareaForTrip").value;
        }
     function toStringList() { 
         var str ='';
@@ -49,23 +65,27 @@
         }
         return str;
     }
-    //function jsonBuilder() {
-    //    let newCreatedTrip = {
-    //        tripName: tripName, 
-    //        itemsListToTrip: markedItemsNames
-    //    };
-    //    return JSON.stringify(newCreatedTrip);
-    //}
-    function finalfunction() {
+  
+    function AJAXCallToCreate() {
        
         var xhttp = new XMLHttpRequest();
-        //var variable = jsonBuilder();
-       // alert(variable);   /Artist/GetImages/?artistName=cher&apiKey=XXX   string name, int[] tripid
         xhttp.open('POST', '/trip/createtrip/?name=' + tripName + toStringList());
-        //xhttp.setRequestHeader('Content-type', 'application/json');
-        xhttp.send(); // may not vvork
-        alert("Your trip");
+        xhttp.send(); 
+        alert("Your trip was succesfully created");
         window.location.href = "/trip/index";
     }
 
+    function createTripFromExistingOne() {
+        tripNameFromOld = document.getElementById("tripNameFromOld").value;
+        oldTripID = document.getElementById("OldTrip").value;
+        alert(tripNameFromOld);
+        alert(oldTripID);
+        AJAXCalltoAddItem(tripNameFromOld, oldTripID);
+    }
+    function AJAXCalltoAddItem(tripNameFromOld, oldTripID) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/trip/createtripfromexistingone?tripNameFromOld=' + tripNameFromOld + '&oldTripID=' + oldTripID, false);
+        xhttp.send();
+        window.location.href = "/trip/index";
+    }
 </script>

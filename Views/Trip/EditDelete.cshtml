@@ -3,16 +3,20 @@
 
 <div>@Model.TripName</div>
 <div>
+    <div>
+        <input type="text" id="newname" placeholder="Type new name of Trip" />
+        <input type="button" onclick="renameTrip()" value="Rename Trip" />
+    </div>
     <form method="post" action="/trip/deletetrip/@Model.Id">
         <input type="submit" value="Delete Trip" />
     </form>
+
     <p>
         <label for="items">Choose item to add:</label><br />
         <select id='eeeee' name="idItem">
-            <option disabled>Item</option>
-            @foreach(Item i in ViewBag.ListOtItems)
+            @foreach (Item i in ViewBag.ListOtItems)
             {
-            <option value="@i.Id">@i.ItemName</option>
+                <option value="@i.Id">@i.ItemName</option>
             }
 
         </select>
@@ -24,20 +28,22 @@
     @foreach (var i in Model.ItemsToTrip)
     {
         @i.Item.ItemName
-            <button onclick="deleteItem(@i.Id)"> Delete</button>
-     }
-    </div>
+        <button onclick="deleteItem(@i.Id)"> Delete</button>
+    }
+</div>
 
 
 <script>
+var idItem;
+var newName;
+var IdTrip = @Model.Id;
+
 function deleteItem(x) {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/trip/deleteitemfromtrip/'+x, false);
         xhttp.send();
         window.location.reload();
         }
-
-var idItem;
 
 function addingNewItem(){
         var e = document.getElementById("eeeee");
@@ -46,10 +52,21 @@ function addingNewItem(){
 }
 function AJAXCalltoAddItem(idItem){
         var xhttp = new XMLHttpRequest();
-        var IdTrip = @Model.Id;
         xhttp.open('POST', '/trip/addingItemToExistingTrip?idItem='+idItem + '&IdTrip=' + IdTrip.toString(), false);
         xhttp.send();
         window.location.reload();
-}
+    }
+
+function renameTrip() {
+    var e = document.getElementById("newname");
+    newName = e.value;
+    AJAXCalltoRenameTrip(newName);
+    }
+function AJAXCalltoRenameTrip(newName) {
+    var xhttp = new XMLHttpRequest(); //int IdTrip, string newName
+    xhttp.open('POST', '/trip/renametrip?IdTrip=' + IdTrip + '&newName=' + newName, false);
+        xhttp.send();
+        window.location.reload();
+    }
 
 </script>

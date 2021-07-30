@@ -31,6 +31,7 @@ namespace TripItemsForEleks.Controllers
         public IActionResult CreateTrip()
         {
             IEnumerable<Item> allItem = _itemRepository.GetAllItems();
+            ViewBag.ReadyMadeTrips = _tripRepository.GetAllTrips();
             return View(allItem);
         }
         [HttpPost]
@@ -64,6 +65,17 @@ namespace TripItemsForEleks.Controllers
         public void AddingItemToExistingTrip(int idItem, int IdTrip)
         {
             _tripRepository.AddingItemToExistingTrip(IdTrip, idItem);
+        }
+        [HttpPost]
+        public void RenameTrip(int IdTrip, string newName)
+        {
+            _tripRepository.RenameTrip(IdTrip, newName);
+        }
+        [HttpPost]
+        public RedirectToActionResult CreateTripFromExistingOne(string tripNameFromOld, int oldTripID) 
+        {
+            _tripRepository.CreateTripFromExistingOne(tripNameFromOld, oldTripID);
+            return RedirectToAction("Index");
         }
     }
 }

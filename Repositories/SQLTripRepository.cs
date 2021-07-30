@@ -97,5 +97,21 @@ namespace TripItemsForEleks.Models
 
             contextDB.Database.ExecuteSqlInterpolated($"AddingItemToExistingTrip {IdTrip}, {IdItem}");
         }
+
+        public void RenameTrip(int id, string newName)
+        {
+            Trip trip = contextDB.Trips.FirstOrDefault(t => t.Id== id);
+            trip.TripName = newName;
+            contextDB.SaveChanges();
+        }
+
+        public void CreateTripFromExistingOne(string tripNameFromOld, int oldTripID)
+        {
+            int[] items = (from its in contextDB.ItemsToTrips
+                           where its.TripId == oldTripID
+                           select its.ItemId).ToArray();
+
+            CreateTrip(tripNameFromOld, items);
+        }
     }
 }
