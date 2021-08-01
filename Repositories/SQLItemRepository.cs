@@ -41,13 +41,6 @@ namespace TripItemsForEleks.Models
         {
             return contextDB.Items.FirstOrDefault(i => i.Id==id);
         }
-
-         public Item Update(Item itemChanges)
-        {
-            var item = contextDB.Items.Attach(itemChanges);
-            item.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            contextDB.SaveChanges();
-            return itemChanges;
-        }
+              
     }
 }

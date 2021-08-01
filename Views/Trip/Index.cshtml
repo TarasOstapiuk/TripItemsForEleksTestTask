@@ -1,25 +1,25 @@
 ﻿@model List<Trip>;
-
+    <link href="~/css/StyleSheet1.css" rel="stylesheet" />
 <div>
-    <h3>
-        Your Trips:
-    </h3>
+    
+    <div class="favoriteLabel"> Your Trips:</div>
+    
     @foreach (var t in Model)
     {
-        <div>
-            <h2>
+        <div style="margin:10px">
+            <div class="favoriteLabel" style="font-size:15px">
                 @t.TripName
-            </h2>
+            </div>
            
                 @foreach (var i in t.ItemsToTrip)
                 {
-                    <div>
+                    <div class="favorite-item" >
                         @i.Item.ItemName
                     </div>
                 }
             <div>
                 <form method="get" action="/trip/editdelete/@t.Id">
-                    <input type="submit" value ="Edit or Delete"/>
+                    <input class="smallbutton" type="submit" value ="Edit or Delete" style="margin:3px"/>
                 </form>
             </div>
             
@@ -28,7 +28,6 @@
 
 </div>
 
-<h3>Hello Eleks from Trip</h3>
 <script>
     function editDeleteTrip(x) {
         var xhttp = new XMLHttpRequest();

@@ -19,9 +19,8 @@ namespace TripItemsForEleks.Models
         public IEnumerable<Item> GetFavorites()
         {
            {
-                // That is for future if we need to pass param to proc. Now proc is hardcoded.
-                /*SqlParameter param = new SqlParameter("@count", "7");*/
-                IEnumerable<Item> items = contextDB.Items.FromSqlRaw("Favorites").ToList();
+                IEnumerable<Item> items = contextDB
+                    .Items.FromSqlRaw("Favorites").ToList();
                 return items;
             }
         }

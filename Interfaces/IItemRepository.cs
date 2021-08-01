@@ -10,7 +10,7 @@ namespace TripItemsForEleks.Models
         Item GetItem(int id);
         IEnumerable<Item> GetAllItems();
         Item AddItem(Item item);
-        Item Update(Item itemChanges);
+        //Item Update(Item itemChanges);
         Item Delete(int id);
     }
 }

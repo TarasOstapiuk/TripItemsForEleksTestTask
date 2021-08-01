@@ -1,30 +1,29 @@
 ﻿@model IEnumerable<Item>;
-
+<link href="~/css/StyleSheet1.css" rel="stylesheet" />
 <div>
-    <h3>
+    <div class="favoriteLabel">
         Your Items:
-    </h3>
+    </div>
     @foreach (var i in Model)
     {
-        <div>
-            <h4>
-                @i.ItemName
-                <div>
-                    <button onclick="deleteItem(@i.Id)"> Delete</button>
-                </div>
-            </h4>
+    <div class="favorite-item">
+        <div class="favorite-item">
+             @i.ItemName
         </div>
-    }
+        <div>
+            <button class="smallbutton"  onclick="deleteItem(@i.Id)"> Delete</button>
+        </div>
+    </div>
+     }
 
 </div>
 <script>
     function deleteItem(x) {
-        alert(x);
         var xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '/item/delete/'+x, false);
+        xhttp.open('POST', '/item/delete/' + x, false);
         xhttp.send();
         window.location.reload();
-        }
+    }
 
 
 

@@ -1,18 +1,18 @@
 ﻿@model Trip
+    <link href="~/css/StyleSheet1.css" rel="stylesheet" />
 
-
-<div>@Model.TripName</div>
+<div class="favoriteLabel">@Model.TripName</div>
 <div>
     <div>
-        <input type="text" id="newname" placeholder="Type new name of Trip" />
-        <input type="button" onclick="renameTrip()" value="Rename Trip" />
+        <input class="inputtext" type="text" id="newname" placeholder="Type new name of Trip" />
+        <input class="smallbutton" type="button" onclick="renameTrip()" value="Rename Trip" />
     </div>
     <form method="post" action="/trip/deletetrip/@Model.Id">
-        <input type="submit" value="Delete Trip" />
+        <input class="smallbutton" type="submit" value="Delete Trip" />
     </form>
 
     <p>
-        <label for="items">Choose item to add:</label><br />
+        <label class="favoriteLabel" for="items">Choose item to add:</label><br />
         <select id='eeeee' name="idItem">
             @foreach (Item i in ViewBag.ListOtItems)
             {
@@ -20,15 +20,19 @@
             }
 
         </select>
-        <button onclick="addingNewItem()"> Add</button>
+        <button class="smallbutton" onclick="addingNewItem()"> Add</button>
     </p>
 </div>
 
 <div>
     @foreach (var i in Model.ItemsToTrip)
     {
-        @i.Item.ItemName
-        <button onclick="deleteItem(@i.Id)"> Delete</button>
+    <div class="items">
+        <div class="favorite-item">@i.Item.ItemName</div>
+        <div>
+            <button class="smallbutton" onclick="deleteItem(@i.Id)"> Delete</button>
+        </div>
+    </div>
     }
 </div>
 

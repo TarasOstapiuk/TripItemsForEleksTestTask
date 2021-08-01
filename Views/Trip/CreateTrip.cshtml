@@ -1,45 +1,53 @@
 ﻿@model IEnumerable<Item>
 
-<h3>Hello from tripcontroller and trip viev!</h3>
+<link href="~/css/StyleSheet1.css" rel="stylesheet" />
 
-<p>
-    <label for="textareaForTrip">Name the trip:</label>
-    <input type="text" name="TripName" placeholder="Max 100 sign" id="textareaForTrip"
-           cols="30" maxlength="100" minlength="2" required>
-</p>
-    
+<div class="parts">
+    <div class="favoriteLabel"><h2>Create trip by choosing items</h2></div>
     <p>
-        <h3>Choose your Items for that Trip</h3>
+       <h5 class="favoriteLabel">Name the trip:</h5>
+        <input type="text" class="inputtext" name="TripName" placeholder="Max 100 sign" id="textareaForTrip"
+               cols="30" maxlength="100" minlength="2" required>
+    </p>
+     
+    <p>
+        <h6 class="favoriteLabel">Choose your Items for that Trip</h6>
     </p>
     @foreach (var item in Model)
     {
         <div>
-            <input type="checkbox" name="ItemsToTrip" value="@item.Id"/>@item.ItemName
+            <input type="checkbox" name="ItemsToTrip" value="@item.Id" />@item.ItemName
         </div>
     }
     </p>
     <p>
-        <button onclick="createTripWithItems()">Create Trip</button>
+        <button class="smallbutton" onclick="createTripWithItems()">Create Trip</button>
     </p>
+</div>
+<div class="parts margins">
     <div>
-        
-        <label for="tripFromExistingOne">Name the trip:</label>
-        <input type="text" id="tripNameFromOld" name="TripName1" placeholder="Max 100 sign"
-               cols="30" maxlength="100" minlength="2" required />
-        <label for="items">Choose Items from another Trip:</label><br />
-        <select id='OldTrip' name="oldTrips">
-            @foreach (Trip i in ViewBag.ReadyMadeTrips)
-            {
-                <option value="@i.Id">@i.TripName</option>
-            }
-
-        </select>
-        <button onclick="createTripFromExistingOne()"> Create Trip</button>
-
+        <div class="favoriteLabel"><h2>Create trip from existing trip</h2></div>
+        <label  for="tripFromExistingOne"><h5 class="favoriteLabel">Name the trip:</h5class="favoriteLabel"></label>
     </div>
+        <div class="margins">
+            <input type="text" class="inputtext" id="tripNameFromOld" name="TripName1" placeholder="Max 100 sign"
+                   cols="30" maxlength="100" minlength="2" required />
+        </div>
+        <div class="margins favoriteLabel"><label for="items">Choose Items from another Trip:</label></div>
+        <div class="margins">
+            <select id='OldTrip' name="oldTrips">
+                @foreach (Trip i in ViewBag.ReadyMadeTrips)
+                {
+                    <option value="@i.Id">@i.TripName</option>
+                }
+
+            </select>
+        </div>
+        <div > <button class="smallbutton" onclick="createTripFromExistingOne()"> Create Trip</button></div>
+</div>
 
 <script>
-    let markedItemsNames = []; 
+    let markedItemsNames = [];
     let tripName;
     let tripNameFromOld;
     let oldTripID;
@@ -53,24 +61,24 @@
         for (var checkbox of signedCheckBox) {
             if (checkbox.checked)
                 markedItemsNames.push(Number.parseInt(checkbox.value));
-            }
-       }
+        }
+    }
     function getTripName() {
-       tripName = document.getElementById("textareaForTrip").value;
-       }
-    function toStringList() { 
-        var str ='';
+        tripName = document.getElementById("textareaForTrip").value;
+    }
+    function toStringList() {
+        var str = '';
         for (var i = 0; i < markedItemsNames.length; i++) {
             str += '&tripId[' + i + ']=' + markedItemsNames[i];
         }
         return str;
     }
-  
+
     function AJAXCallToCreate() {
-       
+
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '/trip/createtrip/?name=' + tripName + toStringList());
-        xhttp.send(); 
+        xhttp.send();
         alert("Your trip was succesfully created");
         window.location.href = "/trip/index";
     }
@@ -78,8 +86,6 @@
     function createTripFromExistingOne() {
         tripNameFromOld = document.getElementById("tripNameFromOld").value;
         oldTripID = document.getElementById("OldTrip").value;
-        alert(tripNameFromOld);
-        alert(oldTripID);
         AJAXCalltoAddItem(tripNameFromOld, oldTripID);
     }
     function AJAXCalltoAddItem(tripNameFromOld, oldTripID) {

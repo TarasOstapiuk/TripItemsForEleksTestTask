@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Item>
-
+    <link href="~/css/StyleSheet1.css" rel="stylesheet" />
+<div class="favoriteLabel">Most popular items:</div>
 @foreach (var item in Model)
 {
-<div>@item.ItemName</div>
+<div class="favorite-item">@item.ItemName</div>
 }

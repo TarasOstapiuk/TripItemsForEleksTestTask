@@ -35,20 +35,7 @@ namespace TripItemsForEleks.Models
             }
             contextDB.ItemsToTrips.AddRange(newList);
             contextDB.SaveChanges();
-            //{
-            //    contextDB.ItemsToTrips.FromSqlRaw("insert into ItemsToTrips values (2, 7),(1, 5),(1, 4),(3, 2),(3, 3)");
-            //    contextDB.SaveChanges();
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new Exception();
-            //}
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ID");
             
-            //dt.Rows.Add(1, 'John');
-            //dt.Rows.Add(2, 'Mark');
-            //dt.Rows.Add(3, 'Stacy');*/
         }
 
         public Trip Delete(int id)
@@ -62,15 +49,12 @@ namespace TripItemsForEleks.Models
             return tripToDelete;
         }
 
-       
-
         public IEnumerable<Trip> GetAllTrips()
             {
             var trips = contextDB.Trips.ToList();
             return trips;
-
         }
-
+        
         public Trip GetTrip(int id)
         {
             Trip currentTrip = contextDB.Trips.FirstOrDefault(i => i.Id == id);
